@@ -14,7 +14,7 @@ import Successpage from "../screen/Successpage";
 import SummaryPage from "../screen/SummaryPage";
 import ProfilePage from "../screen/ProfilePage";
 import AuthSplashScreen from "../screen/AuthSplashScreen";
-import HistoryPage from "../screen/HistoryPage";
+// import HistoryPage from "../screen/HistoryPage";
 
 const Stack = createNativeStackNavigator();
 
@@ -85,13 +85,13 @@ function Navigations(props) {
           name="ProfilePage"
           component={ProfilePage}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           options={{
             headerShown: false,
           }}
           name="HistoryPage"
           component={HistoryPage}
-        />
+        /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );

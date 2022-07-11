@@ -38,7 +38,10 @@ function PackageSize({ navigation }) {
         </View>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.card}>
+      <TouchableOpacity
+        style={styles.card}
+        onPress={() => navigation.navigate("OrderDetails")}
+      >
         <View style={styles.cardDetails}>
           <View>
             <Image source={require("../assets/Boxbody.png")} />
@@ -53,7 +56,10 @@ function PackageSize({ navigation }) {
         </View>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.card}>
+      <TouchableOpacity
+        style={styles.card}
+        onPress={() => navigation.navigate("OrderDetails")}
+      >
         <View style={styles.cardDetails}>
           <View>
             <Image source={require("../assets/Bigbox.png")} />

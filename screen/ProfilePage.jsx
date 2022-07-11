@@ -8,8 +8,6 @@ import { getAuth, signOut } from "firebase/auth";
 function ProfilePage({ navigation, route }) {
   const { user, userId, username } = route.params;
 
-  console.log(userId);
-
   return (
     <View style={styles.container}>
       <View style={styles.navigationPane}>
@@ -28,64 +26,19 @@ function ProfilePage({ navigation, route }) {
             marginTop: 20,
           }}
         >
-          <View
-            style={{
-              height: 100,
-              width: 100,
-              justifyContent: "center",
-              alignSelf: "center",
-              marginTop: 50,
-              borderColor: "#20C3AF",
-              borderRadius: 50,
-              borderWidth: 1,
-            }}
-          ></View>
+          <View style={styles.profilepic}></View>
           <View>
-            <Text
-              style={{
-                textAlign: "center",
-                fontWeight: "700",
-                fontSize: 20,
-                color: "#20c3af",
-                marginTop: 20,
-              }}
-            >
-              {user}
-            </Text>
+            <Text style={styles.mainUserText}>{user}</Text>
           </View>
-          <View
-            style={{
-              flexDirection: "row",
-              marginHorizontal: 20,
-              justifyContent: "space-evenly",
-              marginTop: 70,
-            }}
-          >
-            <View
-              style={{
-                height: 75,
-                width: 150,
-                justifyContent: "center",
-                alignItems: "center",
-                borderColor: "#20C3AF",
-                borderWidth: 1,
-              }}
-            >
+          <View style={styles.btnrow}>
+            <View style={styles.editbtn}>
               <Text
                 style={{ fontWeight: "700", fontSize: 20, color: "#20c3af" }}
               >
                 Edit About
               </Text>
             </View>
-            <View
-              style={{
-                height: 75,
-                justifyContent: "center",
-                alignItems: "center",
-                width: 150,
-                backgroundColor: "#20C3AF",
-              }}
-            >
+            <View style={styles.historybtn}>
               <Text style={{ fontWeight: "700", fontSize: 20, color: "white" }}>
                 History
               </Text>
@@ -93,127 +46,45 @@ function ProfilePage({ navigation, route }) {
           </View>
         </View>
       </View>
-      <View
-        style={{
-          backgroundColor: "#20C3AF",
-          height: "100%",
-          borderTopLeftRadius: 50,
-          borderTopRightRadius: 50,
-        }}
-      >
-        <View
-          style={{
-            height: 75,
-            width: "90%",
-            borderColor: "#f0f0f0",
-            borderWidth: 1,
-            marginTop: 40,
-            marginHorizontal: 20,
-            flexDirection: "row",
-            alignItems: "center",
-          }}
-        >
+      <View style={styles.lowersection}>
+        <View style={styles.displaybox1}>
           <MaterialCommunityIcons
             name="account-circle-outline"
             size={30}
             color="white"
             style={{ marginLeft: 10 }}
           />
-          <View
-            style={{
-              height: 40,
-              marginLeft: 10,
-              borderWidth: 1,
-              borderColor: "#f0f0f0",
-            }}
-          ></View>
-
+          <View style={styles.bigverbose}></View>
           <Text
             style={{
               marginLeft: 10,
               fontWeight: "500",
-              color: "#f0f0f0",
+              color: "red",
               fontSize: 20,
             }}
           >
             {username}
           </Text>
         </View>
-        <View
-          style={{
-            height: 75,
-            width: "90%",
-            borderColor: "#f0f0f0",
-            borderWidth: 1,
-            marginTop: 10,
-            marginHorizontal: 20,
-            flexDirection: "row",
-            alignItems: "center",
-          }}
-        >
+        <View style={styles.displaybox}>
           <MaterialCommunityIcons
             name="email"
             size={30}
             color="white"
             style={{ marginLeft: 10 }}
           />
-          <View
-            style={{
-              height: 40,
-              marginLeft: 10,
-              borderWidth: 1,
-              borderColor: "#f0f0f0",
-            }}
-          ></View>
-
-          <Text
-            style={{
-              marginLeft: 10,
-              fontWeight: "500",
-              color: "#f0f0f0",
-              fontSize: 20,
-            }}
-          >
-            {user}
-          </Text>
+          <View style={styles.bigverbose}></View>
+          <Text style={styles.usertxt}>{user}</Text>
         </View>
-        <View
-          style={{
-            height: 75,
-            width: "90%",
-            borderColor: "#f0f0f0",
-            borderWidth: 1,
-            marginTop: 10,
-            marginHorizontal: 20,
-            flexDirection: "row",
-            alignItems: "center",
-          }}
-        >
+        <View style={styles.displaybox}>
           <MaterialCommunityIcons
-            name="phone"
+            name="identifier"
             size={30}
             color="white"
             style={{ marginLeft: 10 }}
           />
-          <View
-            style={{
-              height: 40,
-              marginLeft: 10,
-              borderWidth: 1,
-              borderColor: "#f0f0f0",
-            }}
-          ></View>
-
-          <Text
-            style={{
-              marginLeft: 10,
-              fontWeight: "500",
-              color: "#f0f0f0",
-              fontSize: 15,
-            }}
-          >
-            {userId}
-          </Text>
+          <View style={styles.bigverbose}></View>
+          <Text style={styles.useridtxt}>{userId}</Text>
         </View>
       </View>
     </View>
@@ -221,6 +92,88 @@ function ProfilePage({ navigation, route }) {
 }
 
 const styles = StyleSheet.create({
+  profilepic: {
+    height: 100,
+    width: 100,
+    justifyContent: "center",
+    alignSelf: "center",
+    marginTop: 50,
+    borderColor: "#20C3AF",
+    borderRadius: 50,
+    borderWidth: 1,
+  },
+  mainUserText: {
+    textAlign: "center",
+    fontWeight: "700",
+    fontSize: 20,
+    color: "#20c3af",
+    marginTop: 20,
+  },
+  btnrow: {
+    flexDirection: "row",
+    marginHorizontal: 20,
+    justifyContent: "space-evenly",
+    marginTop: 70,
+  },
+  editbtn: {
+    height: 75,
+    width: 150,
+    justifyContent: "center",
+    alignItems: "center",
+    borderColor: "#20C3AF",
+    borderWidth: 1,
+  },
+  historybtn: {
+    height: 75,
+    justifyContent: "center",
+    alignItems: "center",
+    width: 150,
+    backgroundColor: "#20C3AF",
+  },
+  lowersection: {
+    backgroundColor: "#20C3AF",
+    height: "100%",
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+  },
+  displaybox1: {
+    height: 75,
+    width: "90%",
+    borderColor: "#f0f0f0",
+    borderWidth: 1,
+    marginTop: 40,
+    marginHorizontal: 20,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  usertxt: {
+    marginLeft: 10,
+    fontWeight: "500",
+    color: "#f0f0f0",
+    fontSize: 20,
+  },
+  displaybox: {
+    height: 75,
+    width: "90%",
+    borderColor: "#f0f0f0",
+    borderWidth: 1,
+    marginTop: 10,
+    marginHorizontal: 20,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  bigverbose: {
+    height: 40,
+    marginLeft: 10,
+    borderWidth: 1,
+    borderColor: "#f0f0f0",
+  },
+  useridtxt: {
+    marginLeft: 10,
+    fontWeight: "500",
+    color: "#f0f0f0",
+    fontSize: 15,
+  },
   container: {
     backgroundColor: "#f0f0f0",
     flex: 1,
