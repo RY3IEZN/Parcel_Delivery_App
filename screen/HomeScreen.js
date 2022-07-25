@@ -63,7 +63,7 @@ function HomeScreen({ navigation }) {
       </View>
     );
   };
-  0;
+
   return (
     <View style={styles.container}>
       <View style={styles.upperSection}>
@@ -166,7 +166,7 @@ function HomeScreen({ navigation }) {
       <View>
         <Text style={styles.looktxt}>Looking for something? Check History</Text>
         <TouchableOpacity
-          onPress={() => navigation.navigate("HistoryPage")}
+          onPress={() => navigation.navigate("HistoryPage", { user })}
           style={styles.historybtn}
         >
           <View style={styles.historycontent}>

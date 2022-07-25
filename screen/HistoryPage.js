@@ -18,32 +18,37 @@ import {
   getFirestore,
 } from "firebase/firestore";
 import { getAuth, signOut } from "firebase/auth";
+import axios from "axios";
 
-const auth = getAuth();
-const user = auth.currentUser.email;
-const db = getFirestore();
-const q = query(collection(db, "mail"), where("user", "==", user));
+// const auth = getAuth();
+// const user = auth.currentUser.email;
 
-function HistoryPage({ navigation }) {
-  const [listdata, setListData] = useState();
+function HistoryPage({ route, navigation }) {
+  const [listdata, setListData] = useState([]);
+  const db = getFirestore();
+  const { user } = route.params;
+
+  useEffect(() => {
+    querySnapshots();
+  }, []);
+
+  const q = query(collection(db, "mail"), where("user", "==", user));
 
   const querySnapshots = async () => {
     try {
-      const list = await getDocs(q);
-      list.forEach((doc) => {
-        listdata.push(doc.id, "=>", doc.data());
-        // doc.data() is never undefined for query doc snapshots
-        // console.log(doc.id, " => ", doc.data());
+      const querySnapshot = await getDocs(q);
+
+      querySnapshot.forEach((doc) => {
+        const details = [];
+        details.push(doc.id, " => ", doc.data(), ...details);
+        setListData(details);
       });
     } catch (error) {
       console.log(error);
     }
   };
 
-  useEffect(() => {
-    querySnapshots();
-    setListData(listdata);
-  }, []);
+  // console.log(listdata, "llllll");
 
   return (
     <ScrollView>
@@ -59,46 +64,48 @@ function HistoryPage({ navigation }) {
           <Text style={styles.titleText}>History</Text>
         </View>
         <View></View>
-        <FlatList
+        {/* <Text>{listdata}</Text> */}
+        {/* <Text>{listdata.senderName}</Text> */}
+        {/* <FlatList
           data={listdata}
           horizontal
           renderItem={(item) => {
             return (
               <View>
-                <Text>{item.senderPhone}</Text>
-                <Text>{item.reciverPhone}</Text>
-                <Text>{item.senderAddress}</Text>
-                <Text>{item.reciverAddress}</Text>
-                <Text>{item.reciverName}</Text>
-                <Text>{item.senderName}</Text>
+                <Text>{item.item.reciverAddress} </Text>
+                <Text>{item.item.reciverName} </Text>
+                <Text>{item.item.reciverPhone}</Text>
+                <Text>{item.item.senderAddress} </Text>
+                <Text>{item.item.senderName}</Text>
+                <Text>{item.item.senderPhone} </Text>
+                <Text>{item.item.user}</Text>
               </View>
             );
           }}
-        />
-        {/* {
+        /> */}
+        {
           <View>
             <Text>
-              {listdata?.map((item) => {
-                return (
-                  <View style={{ flexDirection: "row" }}>
+              {listdata ? (
+                listdata.map((item, index) => {
+                  return (
                     <View>
-                      <Text>{item.senderPhone}</Text>
+                      <Text>{item.reciverAddress} </Text>
+                      <Text>{item.reciverName} </Text>
                       <Text>{item.reciverPhone}</Text>
-                    </View>
-                    <View>
-                      <Text>{item.senderAddress}</Text>
-                      <Text>{item.reciverAddress}</Text>
-                    </View>
-                    <View>
-                      <Text>{item.reciverName}</Text>
+                      <Text>{item.senderAddress} </Text>
                       <Text>{item.senderName}</Text>
+                      <Text>{item.senderPhone} </Text>
+                      <Text>{item.user}</Text>
                     </View>
-                  </View>
-                );
-              })}
+                  );
+                })
+              ) : (
+                <Text> NO inforamtion </Text>
+              )}
             </Text>
           </View>
-        } */}
+        }
       </View>
     </ScrollView>
   );
